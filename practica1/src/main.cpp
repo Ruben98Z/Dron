@@ -127,7 +127,7 @@ void funDisplay() {
     glm::mat4 P  = glm::perspective(glm::radians(fovy), aspect, nplane, fplane); 
 
  // Matriz de Vista V (Cámara)
-    glm::vec3 pos   (8.0, 8.0,  8.0);
+    glm::vec3 pos   (4.0, 4.0,  4.0);
     glm::vec3 lookat(0.0, 0.0,  0.0);
     glm::vec3 up    (0.0, 1.0,  0.0);
     glm::mat4 V = glm::lookAt(pos, lookat, up);
@@ -175,7 +175,7 @@ void drawAlas(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 
 void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
     
-    glm::mat4 S = glm::scale(I, glm::vec3(4.0, 1.0, 4.0));
+    glm::mat4 S = glm::scale(I, glm::vec3(2.0, 1.0, 2.0));
     drawObject(modelPlane,glm::vec3(0.75, 0.75, 0.75),P,V,M*S);
 
 }
