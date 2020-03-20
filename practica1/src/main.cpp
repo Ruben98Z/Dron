@@ -154,8 +154,9 @@ void drawObject(Model model, glm::vec3 color, glm::mat4 P, glm::mat4 V, glm::mat
     shaders.setVec3("uColor",color);
     model.renderModel(GL_FILL);
     glDisable(GL_POLYGON_OFFSET_FILL);
+
     
-    shaders.setVec3("uColor",glm::vec3(0.25, 0.25, 0.25));
+    shaders.setVec3("uColor",glm::vec3(color.r*0.75, color.g*0.75, color.b*0.75));
     model.renderModel(GL_LINE);
     
 }
@@ -176,27 +177,27 @@ void drawAlas(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
     
     glm::mat4 S = glm::scale(I, glm::vec3(2.0, 1.0, 2.0));
-    drawObject(modelPlane,glm::vec3(0.75, 0.75, 0.75),P,V,M*S);
+    drawObject(modelPlane,glm::vec3(0.5, 0.5, 0.5),P,V,M*S);
 
 }
 
 void drawAspa(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-    glm::mat4 S = glm::scale(I, glm::vec3(0.1, 0.2, 0.1));
+    glm::mat4 S = glm::scale(I, glm::vec3(0.05, 0.0618, 0.015));
     glm::mat4 T = glm::translate(I, glm::vec3(0.0, -2.75, 0.0));
     drawObject(modelCone,glm::vec3(1.0, 0.0, 0.0),P,V,M*S*T);
 
 }
 
 void drawHelice(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-    //Borro una aspa y las separo 120º
+    glm::mat4 Ry90  = glm::rotate(I, glm::radians(90.f),  glm::vec3(0.0, 1.0, 0.0));
     glm::mat4 Rz90  = glm::rotate(I, glm::radians(90.f),  glm::vec3(0.0, 0.0, 1.0));
     glm::mat4 Rx90  = glm::rotate(I, glm::radians(90.f),  glm::vec3(1.0, 0.0, 0.0));
     glm::mat4 RzN90 = glm::rotate(I, glm::radians(-90.f), glm::vec3(0.0, 0.0, 1.0));
     glm::mat4 RxN90 = glm::rotate(I, glm::radians(-90.f), glm::vec3(1.0, 0.0, 0.0));
     
-    drawAspa(P,V,M*Rz90);
+    drawAspa(P,V,M*Rz90*Ry90);
     drawAspa(P,V,M*Rx90);
-    drawAspa(P,V,M*RzN90);
+    drawAspa(P,V,M*RzN90*Ry90);
     drawAspa(P,V,M*RxN90);
     
 }
