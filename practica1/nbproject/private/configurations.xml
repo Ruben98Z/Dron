@@ -27,7 +27,7 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}"</runcommand>
-        <rundir>C:\Users\Rubén.Z.J\Desktop\Graficos por computador\practica1\dist\Debug\MinGW-Windows</rundir>
+        <rundir>C:\Users\Rubén.Z.J\Desktop\Dron\practica1\dist\Debug\MinGW-Windows</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
