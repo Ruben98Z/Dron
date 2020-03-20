@@ -136,7 +136,7 @@ void funDisplay() {
     //Dibujamos el suelo
     drawSuelo(P,V,I);
     
-    drawHelice(P,V,I);
+    drawAlas(P,V,I);
     
     
     
@@ -166,11 +166,24 @@ void drawCuerpo(glm::mat4 P, glm::mat4 V, glm::mat4 M){
 }
 
 void drawBrazo(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-    glm::mat4 S = glm::scale(I, glm::vec3(0.1, 2.0, 0.1));
-    drawObject(modelCylinder,glm::vec3(0.0, 1.0, 0.0),P,V,M*S);
+    glm::mat4 S = glm::scale(I, glm::vec3(0.05, 0.5, 0.05));
+    glm::mat4 T = glm::translate(I, glm::vec3(0.0, 1.0, 0.0));
+    glm::mat4 Rz90  = glm::rotate(I, glm::radians(90.f),  glm::vec3(0.0, 0.0, 1.0));
+    
+    drawObject(modelCylinder,glm::vec3(0.0, 0.0, 1.0),P,V,M*Rz90*S*T);
+    
+    glm::mat4 Ry45  = glm::rotate(I, glm::radians(45.f),glm::vec3(0.0, 1.0, 0.0));
+    glm::mat4 T2    = glm::translate(I, glm::vec3(-1.0, 0.0, 0.0));
+    drawHelice(P,V,M*T2*Ry45);
 }
 
 void drawAlas(glm::mat4 P, glm::mat4 V, glm::mat4 M){
+   glm::mat4 Ry72  = glm::rotate(I, glm::radians(72.f),glm::vec3(0.0, 1.0, 0.0));
+   drawBrazo(P,V,M);
+   drawBrazo(P,V,M*Ry72);
+   drawBrazo(P,V,M*Ry72*Ry72);
+   drawBrazo(P,V,M*Ry72*Ry72*Ry72);
+   drawBrazo(P,V,M*Ry72*Ry72*Ry72*Ry72);
    
 }
 
