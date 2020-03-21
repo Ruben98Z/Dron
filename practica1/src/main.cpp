@@ -195,7 +195,7 @@ void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 }
 
 void drawAspa(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-    glm::mat4 S = glm::scale(I, glm::vec3(0.05, 0.0618, 0.015));
+    glm::mat4 S = glm::scale(I, glm::vec3(0.0372, 0.0618, 0.0111));
     glm::mat4 T = glm::translate(I, glm::vec3(0.0, -2.75, 0.0));
     drawObject(modelCone,glm::vec3(1.0, 0.0, 0.0),P,V,M*S*T);
 
