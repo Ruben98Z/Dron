@@ -45,6 +45,8 @@ void drawDron  (glm::mat4 P, glm::mat4 V, glm::mat4 M);
    int h = 600;
    
    
+   
+   
       
 int main(int argc, char** argv) {
 
@@ -127,16 +129,32 @@ void funDisplay() {
     glm::mat4 P  = glm::perspective(glm::radians(fovy), aspect, nplane, fplane); 
 
  // Matriz de Vista V (Cámara)
-    glm::vec3 pos   (4.0, 4.0,  4.0);
+    glm::vec3 pos   (4.0, 2.0,  4.0);
     glm::vec3 lookat(0.0, 0.0,  0.0);
     glm::vec3 up    (0.0, 1.0,  0.0);
     glm::mat4 V = glm::lookAt(pos, lookat, up);
     
  // Dibujamos la escena
+    
     //Dibujamos el suelo
     drawSuelo(P,V,I);
     
-    drawAlas(P,V,I);
+    //Apartado 3
+    //drawDron(P,V,I);
+    
+    glm::mat4 TA = glm::translate(I, glm::vec3(-2.0, 0.5, -2.0));
+    glm::mat4 RA  = glm::rotate(I, glm::radians(27.f),  glm::vec3(0.0, 1.0, 0.0));
+    
+    glm::mat4 SB = glm::scale(I, glm::vec3(0.5, 0.5, 0.5));
+    glm::mat4 RB  = glm::rotate(I, glm::radians(30.f),  glm::vec3(1.0, 0.0, 1.0));
+    
+    //Aparatdo 4.a
+    glm::mat4 MA = TA*RA;
+    //drawDron(P,V,MA);
+
+    //Apartado 4.b
+    glm::mat4 MB = TA*RB*RA*SB;
+    drawDron(P,V,MB);
     
     
     
@@ -162,18 +180,19 @@ void drawObject(Model model, glm::vec3 color, glm::mat4 P, glm::mat4 V, glm::mat
 }
 
 void drawCuerpo(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-   
+    glm::mat4 S = glm::scale(I, glm::vec3(0.5, 0.2, 0.5));   
+    drawObject(modelSphere,glm::vec3(0.0, 1.0, 0.0),P,V,M*S);
 }
 
 void drawBrazo(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     glm::mat4 S = glm::scale(I, glm::vec3(0.05, 0.5, 0.05));
     glm::mat4 T = glm::translate(I, glm::vec3(0.0, 1.0, 0.0));
-    glm::mat4 Rz90  = glm::rotate(I, glm::radians(90.f),  glm::vec3(0.0, 0.0, 1.0));
+    glm::mat4 RzN90  = glm::rotate(I, glm::radians(-90.f),  glm::vec3(0.0, 0.0, 1.0));
     
-    drawObject(modelCylinder,glm::vec3(0.0, 0.0, 1.0),P,V,M*Rz90*S*T);
+    drawObject(modelCylinder,glm::vec3(0.0, 0.0, 1.0),P,V,M*RzN90*S*T);
     
-    glm::mat4 Ry45  = glm::rotate(I, glm::radians(45.f),glm::vec3(0.0, 1.0, 0.0));
-    glm::mat4 T2    = glm::translate(I, glm::vec3(-1.0, 0.0, 0.0));
+    glm::mat4 Ry45  = glm::rotate(I, glm::radians(45.0f),glm::vec3(0.0, 1.0, 0.0));
+    glm::mat4 T2    = glm::translate(I, glm::vec3(1.0, 0.0, 0.0));
     drawHelice(P,V,M*T2*Ry45);
 }
 
@@ -195,7 +214,7 @@ void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 }
 
 void drawAspa(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-    glm::mat4 S = glm::scale(I, glm::vec3(0.0372, 0.0618, 0.0111));
+    glm::mat4 S = glm::scale(I, glm::vec3(0.0372, 0.0618, 0.011));
     glm::mat4 T = glm::translate(I, glm::vec3(0.0, -2.75, 0.0));
     drawObject(modelCone,glm::vec3(1.0, 0.0, 0.0),P,V,M*S*T);
 
@@ -216,6 +235,6 @@ void drawHelice(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 }
 
 void drawDron(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-   
+    drawCuerpo(P,V,M);
+    drawAlas(P,V,M);
 }
-    
