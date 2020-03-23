@@ -181,7 +181,7 @@ void drawObject(Model model, glm::vec3 color, glm::mat4 P, glm::mat4 V, glm::mat
 }
 
 void drawCuerpo(glm::mat4 P, glm::mat4 V, glm::mat4 M){
-    glm::mat4 S = glm::scale(I, glm::vec3(0.5, 0.2, 0.5));   
+    glm::mat4 S = glm::scale(I, glm::vec3(0.5, 0.2, 0.50000025));   
     drawObject(modelSphere,glm::vec3(0.0, 1.0, 0.0),P,V,M*S);
 }
 
@@ -215,8 +215,8 @@ void drawSuelo(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 }
 
 void drawAspa(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-    glm::mat4 S = glm::scale(I, glm::vec3(0.0372, 0.0618, 0.011));
-    glm::mat4 T = glm::translate(I, glm::vec3(0.0, -2.75, 0.0));
+    glm::mat4 S = glm::scale(I, glm::vec3(0.037216146, 0.061797957, 0.011193789));
+    glm::mat4 T = glm::translate(I, glm::vec3(0.0, -2.75455951691, 0.0));
     drawObject(modelCone,glm::vec3(1.0, 0.0, 0.0),P,V,M*S*T);
 
 }
