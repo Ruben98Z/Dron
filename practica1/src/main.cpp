@@ -129,7 +129,7 @@ void funDisplay() {
     glm::mat4 P  = glm::perspective(glm::radians(fovy), aspect, nplane, fplane); 
 
  // Matriz de Vista V (Cámara)
-    glm::vec3 pos   (4.0, 2.0,  4.0);
+    glm::vec3 pos   (4.0, 4.0,  4.0);
     glm::vec3 lookat(0.0, 0.0,  0.0);
     glm::vec3 up    (0.0, 1.0,  0.0);
     glm::mat4 V = glm::lookAt(pos, lookat, up);
@@ -140,7 +140,10 @@ void funDisplay() {
     drawSuelo(P,V,I);
     
     //Apartado 3
-    //drawDron(P,V,I);
+    drawDron(P,V,I);
+    
+    
+    //Matrices para el apartado 4
     
     glm::mat4 TA = glm::translate(I, glm::vec3(-2.0, 0.5, -2.0));
     glm::mat4 RA  = glm::rotate(I, glm::radians(27.f),  glm::vec3(0.0, 1.0, 0.0));
@@ -154,9 +157,7 @@ void funDisplay() {
 
     //Apartado 4.b
     glm::mat4 MB = TA*RB*RA*SB;
-    drawDron(P,V,MB);
-    
-    
+    //drawDron(P,V,MB);
     
     
     
@@ -191,7 +192,7 @@ void drawBrazo(glm::mat4 P, glm::mat4 V, glm::mat4 M){
     
     drawObject(modelCylinder,glm::vec3(0.0, 0.0, 1.0),P,V,M*RzN90*S*T);
     
-    glm::mat4 Ry45  = glm::rotate(I, glm::radians(45.0f),glm::vec3(0.0, 1.0, 0.0));
+    glm::mat4 Ry45  = glm::rotate(I, glm::radians(45.f),glm::vec3(0.0, 1.0, 0.0));
     glm::mat4 T2    = glm::translate(I, glm::vec3(1.0, 0.0, 0.0));
     drawHelice(P,V,M*T2*Ry45);
 }
